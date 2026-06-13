@@ -21,26 +21,38 @@ A powerful CLI tool to connect Tuya Smart Cameras to RTSP clients through revers
 
 ## 🚀 Quick Start
 
+For simplicity, if you install this repo under ~/  (aka /root, or type pwd to find out)
+instead of running ~/tuya-local-rtsp/tuya-ipc-terminal <command> [<args>] [<args>] 
+or /root/tuya-local-rtsp/tuya-ipc-terminal <command> [<args>] [<args>]  (both are same thing)
+you can create a softlink for your convenient. 
+
+Create a softlink in your bin folder. /usr/local/bin for example (type echo $PATH to find out )
+>> ln -s /root/tuya-local-rtsp/tuya-ipc-terminal  /usr/local/bin/tuyacam
+
+now, you just need to run it as tuyacam.
+>>   tuyacam  <command> [<args>]
+
 ### Installation
 
 ```bash
-git clone <repository-url>
-cd tuya-local-rtsp
-chmod +x build.sh
-./build.sh
+git clone <repository-url> \
+cd tuya-local-rtsp \
+chmod +x build.sh \
+./build.sh \
+ln -s $PWD/tuya-ipc-terminal /usr/local/bin/tuyacam
 ```
 
 ### 1-Minute Setup
 
 ```bash
 # 1. Add your Tuya account (interactive)
-./tuya-ipc-terminal auth add eu-central user@example.com
+tuyacam auth add eu-central user@example.com
 
 # 2. Discover your cameras
-./tuya-ipc-terminal cameras refresh
+tuyacam cameras refresh
 
 # 3. Start streaming
-./tuya-ipc-terminal rtsp start --port 8554
+tuyacam rtsp start --port 8554
 
 # 4. Watch your cameras
 ffplay rtsp://localhost:8554/MyCamera
@@ -49,6 +61,8 @@ ffplay rtsp://localhost:8554/MyCamera
 ## 📖 Complete Documentation
 
 ### 🔐 Authentication Management
+
+##replace command line below ./tuya-ipc/terminal   with tuyacam
 
 #### Two Authentication Methods
 
