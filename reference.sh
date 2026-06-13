@@ -43,35 +43,11 @@ print_color "$GREEN" "✓ found: $(go version)" && echo
 
 print_header "TUYA IPC TERMINAL BUILD"
 
-# Build information
-VERSION=$(git describe --tags --always --dirty 2>/dev/null || echo "dev")
-BUILD_TIME=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-VERSION=$(git describe --tags --always --dirty 2>/dev/null || echo "dev")
-
-# Get dependencies
-print_section "Getting dependencies..." && echo
-go mod tidy
-
-# Verify all packages can be imported
-print_section "Verifying packages..." && echo
-go list ./...
-
-# Build for current platform
-print_section "Building binary..." && echo
-LDFLAGS="-s -w -X main.version=${VERSION} -X main.buildTime=${BUILD_TIME}"
-go build -ldflags "${LDFLAGS}" -o tuya-ipc-terminal .
-
-print_color $GREEN "✓ Build complete: ./tuya-ipc-terminal" && echo
-
 # Show build info
 if command -v ls >/dev/null 2>&1; then
     SIZE=$(ls -lh tuya-ipc-terminal | awk '{print $5}')
-    print_color $GREEN "✓ Binary size: ${SIZE}" && echo
+    print_color $GREEN "✓ Tuyacam Binary size: ${SIZE}" && echo
 fi
-
-print_color $GREEN "✓ Version: ${VERSION}" && echo
-print_color $GREEN "✓ Build time: ${BUILD_TIME}" && echo
-print_color $GREEN "✓ Go version: ${GO_VERSION}" && echo
 
 # Show available commands
 print_header "COMMAND REFERENCE"
@@ -209,5 +185,4 @@ print_color $GREEN "✅ Example: ./tuya-ipc-terminal auth --help" && echo
 print_header "BUILD COMPLETE"
 print_color $GREEN "🎉 tuya-ipc-terminal is ready to use!" && echo
 print_color $YELLOW "Start with: " && echo "./tuya-ipc-terminal auth add [region] [email]" && echo
-print_color $YELLOW "Or run ./reference.sh for my info "
 echo ""
