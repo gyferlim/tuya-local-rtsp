@@ -22,15 +22,24 @@ A powerful CLI tool to connect Tuya Smart Cameras to RTSP clients through revers
 ## 🚀 Quick Start
 
 For simplicity, if you install this repo under ~/  (aka /root, or type pwd to find out)
-instead of running ~/tuya-local-rtsp/tuya-ipc-terminal <command> [<args>] [<args>] 
-or /root/tuya-local-rtsp/tuya-ipc-terminal <command> [<args>] [<args>]  (both are same thing)
-you can create a softlink for your convenient. 
+instead of running 
+```bash
+~/tuya-local-rtsp/tuya-ipc-terminal <command> [<args>] [<args>] 
+```
+or 
+```bash
+/root/tuya-local-rtsp/tuya-ipc-terminal <command> [<args>] [<args>]
+```
+both are same thing, you can create a softlink for your convenient. 
 
 Create a softlink in your bin folder. /usr/local/bin for example (type echo $PATH to find out )
-> ln -s /root/tuya-local-rtsp/tuya-ipc-terminal  /usr/local/bin/tuyacam
-
+```bash
+ln -s /root/tuya-local-rtsp/tuya-ipc-terminal  /usr/local/bin/tuyacam
+```
 now, you just need to run it as tuyacam.
->   tuyacam  <command> [<args>]
+```bash
+tuyacam  <command> [<args>]
+```
 
 ### Installation
 
