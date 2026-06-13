@@ -13,7 +13,7 @@ NC='\033[0m' # No Color
 
 # Function to print colored output
 print_color() {
-    printf "${1}${2}${NC}\n"
+    printf "${1}${2}${NC}"
 }
 
 print_header() {
@@ -37,6 +37,16 @@ GO_VERSION=$(go version | awk '{print $3}')
 
 print_header "TUYA IPC TERMINAL BUILD"
 
+print_color "$GREEN" "Depencency:" && echo "Checking if Go installed\n"
+# Check Go installation
+if ! command -v go >/dev/null 2>&1; then
+    print_color "$RED" "ERROR: " && echo "Go compiler is not installed or not found in PATH.\n"
+    print_color "$YELLOW" "Please install Go before running this build script.\n"
+    exit 1
+fi
+print_color "$GREEN" "✓ Go found: " && echo "$(go version)"
+
+
 # Get dependencies
 print_section "Getting dependencies..."
 go mod tidy
@@ -50,7 +60,7 @@ print_section "Building binary..."
 LDFLAGS="-s -w -X main.version=${VERSION} -X main.buildTime=${BUILD_TIME}"
 go build -ldflags "${LDFLAGS}" -o tuya-ipc-terminal .
 
-print_color $GREEN "✓ Build complete: ./tuya-ipc-terminal"
+print_color $GREEN "✓ Build complete: ./tuya-ipc-terminal\n"
 
 # Show build info
 if command -v ls >/dev/null 2>&1; then
@@ -58,9 +68,9 @@ if command -v ls >/dev/null 2>&1; then
     print_color $GREEN "✓ Binary size: ${SIZE}"
 fi
 
-print_color $GREEN "✓ Version: ${VERSION}"
-print_color $GREEN "✓ Build time: ${BUILD_TIME}"
-print_color $GREEN "✓ Go version: ${GO_VERSION}"
+print_color $GREEN "✓ Version: ${VERSION}\n"
+print_color $GREEN "✓ Build time: ${BUILD_TIME}\n"
+print_color $GREEN "✓ Go version: ${GO_VERSION}\n"
 
 # Show available commands
 print_header "COMMAND REFERENCE"
@@ -103,25 +113,25 @@ echo "  Password      Use email and password with country code selection"
 
 print_header "QUICK START GUIDE"
 
-print_color $CYAN "Step 1: Authenticate"
+print_color $CYAN "Step 1: Authenticate\n"
 echo "  ./tuya-ipc-terminal auth add eu-central user@example.com"
 echo "  # Choose authentication method when prompted"
 echo ""
 
-print_color $CYAN "Step 2: List Available Regions & Country Codes (if needed)"
+print_color $CYAN "Step 2: List Available Regions & Country Codes (if needed)\n"
 echo "  ./tuya-ipc-terminal auth show-regions"
 echo "  ./tuya-ipc-terminal auth show-country-codes --search germany"
 echo ""
 
-print_color $CYAN "Step 3: Refresh Camera List"
+print_color $CYAN "Step 3: Refresh Camera List\n"
 echo "  ./tuya-ipc-terminal cameras refresh"
 echo ""
 
-print_color $CYAN "Step 4: Start RTSP Server"
+print_color $CYAN "Step 4: Start RTSP Server\n"
 echo "  ./tuya-ipc-terminal rtsp start --port 8554"
 echo ""
 
-print_color $CYAN "Step 5: Access Camera Streams"
+print_color $CYAN "Step 5: Access Camera Streams\n"
 echo "  # High Definition Stream:"
 echo "  ffplay rtsp://localhost:8554/CameraName/hd"
 echo ""
@@ -133,7 +143,7 @@ echo "  vlc rtsp://localhost:8554/CameraName/hd"
 
 print_header "USEFUL EXAMPLES"
 
-print_color $PURPLE "Authentication Examples:"
+print_color $PURPLE "Authentication Examples:\n"
 echo "  # QR Code authentication (default)"
 echo "  ./tuya-ipc-terminal auth add eu-central john@example.com"
 echo ""
@@ -144,7 +154,7 @@ echo "  # Test if session is still valid"
 echo "  ./tuya-ipc-terminal auth test eu-central john@example.com"
 echo ""
 
-print_color $PURPLE "Camera Management Examples:"
+print_color $PURPLE "Camera Management Examples:\n"
 echo "  # List all cameras with details"
 echo "  ./tuya-ipc-terminal cameras list"
 echo ""
@@ -155,7 +165,7 @@ echo "  # Refresh camera list after adding new cameras"
 echo "  ./tuya-ipc-terminal cameras refresh"
 echo ""
 
-print_color $PURPLE "RTSP Server Examples:"
+print_color $PURPLE "RTSP Server Examples:\n"
 echo "  # Start server on custom port"
 echo "  ./tuya-ipc-terminal rtsp start --port 9554"
 echo ""
@@ -167,9 +177,9 @@ echo "  ./tuya-ipc-terminal rtsp status"
 
 print_header "TROUBLESHOOTING"
 
-print_color $RED "Common Issues & Solutions:"
+print_color $RED "Common Issues & Solutions:\n"
 echo ""
-echo "❌ Authentication fails:"
+echo "❌" && print_color $YELLOW " Authentication fails:\n"
 echo "   → Check region is correct for your account"
 echo "   → Verify email address is correct"
 echo "   → Try refreshing: ./tuya-ipc-terminal auth refresh [region] [email]"
