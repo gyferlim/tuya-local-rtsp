@@ -25,7 +25,7 @@ A powerful CLI tool to connect Tuya Smart Cameras to RTSP clients through revers
 
 ```bash
 git clone <repository-url>
-cd tuya-ipc-terminal
+cd tuya-local-rtsp
 chmod +x build.sh
 ./build.sh
 ```
