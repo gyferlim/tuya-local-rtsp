@@ -27,10 +27,10 @@ or /root/tuya-local-rtsp/tuya-ipc-terminal <command> [<args>] [<args>]  (both ar
 you can create a softlink for your convenient. 
 
 Create a softlink in your bin folder. /usr/local/bin for example (type echo $PATH to find out )
->> ln -s /root/tuya-local-rtsp/tuya-ipc-terminal  /usr/local/bin/tuyacam
+> ln -s /root/tuya-local-rtsp/tuya-ipc-terminal  /usr/local/bin/tuyacam
 
 now, you just need to run it as tuyacam.
->>   tuyacam  <command> [<args>]
+>   tuyacam  <command> [<args>]
 
 ### Installation
 
